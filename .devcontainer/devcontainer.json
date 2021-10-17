@@ -1,0 +1,14 @@
+{
+	"name": "Node.js & TypeScript",
+	"dockerComposeFile":"docker-compose.yml",
+	"service":"dev",
+	"workspaceFolder":"/work",
+	"postCreateCommand": "chmod 744 /work/.devcontainer/postCreateCommand.sh && /work/.devcontainer/postCreateCommand.sh",
+	"settings": {},
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"octref.vetur",
+		"mhutchie.git-graph"
+	],
+	"remoteUser": "root"
+}
