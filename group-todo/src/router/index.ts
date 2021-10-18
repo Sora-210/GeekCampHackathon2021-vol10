@@ -26,7 +26,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.noAuth)) {
-    if (store.getters.User) {
+    if (!store.getters.User) {
       next()
     } else {
       next('/')
