@@ -6,7 +6,9 @@
       dark
     >
       <div class="d-flex align-center">
-        <h1>
+        <h1
+          @click="$router.push('/')"
+        >
           Group Task Checker
         </h1>
       </div>
@@ -16,8 +18,18 @@
       <v-btn
         elevation="3"
         outlined
+        @click="$router.push('/login')"
+        v-if="$store.getters.User !== null"
       >
         <span class="mr-2">Login</span>
+      </v-btn>
+      <v-btn
+        elevation="3"
+        outlined
+        @click="logout"
+        v-else
+      >
+        <span class="mr-2">Logout</span>
       </v-btn>
     </v-app-bar>
 
@@ -32,12 +44,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { signOut, getAuth, Auth} from '@firebase/auth'
 
 export default Vue.extend({
   name: 'App',
 
-  data: () => ({
-    //
-  }),
+  methods: {
+    logout: function() {
+      const auth:Auth = getAuth()
+      signOut(auth)
+        .then(() => {
+          this.$router.push('/')
+        })
+    }
+  }
 });
 </script>
