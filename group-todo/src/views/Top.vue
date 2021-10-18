@@ -9,7 +9,7 @@
         id="title_box"
       >
         <div id="title">
-          <h1 >Group Task Checker</h1>
+          <h1>Group Task Checker</h1>
           <p>グループプロジェクトのタスクを一括管理</p>
         </div>
       </v-row>
@@ -34,6 +34,7 @@
   align-content: center;
 }
 #title {
+  color: #2c2c2c;
   text-align: center;
   padding: 30px 50px;
   backdrop-filter: blur(4px);
