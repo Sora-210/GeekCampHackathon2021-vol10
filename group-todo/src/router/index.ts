@@ -15,6 +15,17 @@ const routes: Array<RouteConfig> = [
     name: 'Login',
     component: () => import('../views/Login.vue'),
     meta: {noAuth:true}
+  },
+  //Project Pages
+  {
+    path: '/project/:projectId/tasks',
+    name: 'ProjectTasks',
+    component: () => import('../views/project/Tasks.vue')
+  },
+  {
+    path: '/project/:projectId/users',
+    name: 'ProjectUsers',
+    component: () => import('../views/project/Users.vue')
   }
 ]
 
