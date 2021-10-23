@@ -15,7 +15,9 @@ initializeApp({
 })
 const auth:Auth = getAuth();
 onAuthStateChanged(auth,(user) => {
-  store.commit('setUser', user)
+  if (user) {
+    store.commit('setUser', user)
+  }
 })
 
 Vue.config.productionTip = false

@@ -34,6 +34,11 @@ export default new Vuex.Store({
       },
     ]
   },
+  getters: {
+    loginState: (state) => {
+      return state.User != null
+    }
+  },
   mutations: {
     setUser(state, user) {
       state.User = user
