@@ -5,7 +5,7 @@ class Projects extends Model {
     public readonly id: number
     public name: string
     public owner_uid: string
-    public readonly createAt: Date
+    public readonly createdAt: Date
     public readonly updatedAt: Date
 }
 
@@ -24,7 +24,7 @@ Projects.init({
         allowNull: false,
         type: DataTypes.STRING
     },
-    createAt: {
+    createdAt: {
         allowNull: false,
         type: DataTypes.DATE
     },

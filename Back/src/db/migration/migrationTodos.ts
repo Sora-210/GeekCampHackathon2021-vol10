@@ -28,7 +28,7 @@ const queryTodoTable = {
                 allowNull: true,
                 type: DataTypes.DATE
             },
-            createAt: {
+            createdAt: {
                 allowNull: false,
                 type: DataTypes.DATE
             },

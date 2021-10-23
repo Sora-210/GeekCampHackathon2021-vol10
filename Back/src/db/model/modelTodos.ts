@@ -8,7 +8,7 @@ class Todos extends Model {
     public status: boolean
     public content: string
     public period: Date
-    public readonly createAt: Date
+    public readonly createdAt: Date
     public readonly updatedAt: Date
 }
 
@@ -39,7 +39,7 @@ Todos.init({
         allowNull: true,
         type: DataTypes.DATE
     },
-    createAt: {
+    createdAt: {
         allowNull: false,
         type: DataTypes.DATE
     },
