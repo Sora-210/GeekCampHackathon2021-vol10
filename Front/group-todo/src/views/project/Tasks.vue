@@ -6,6 +6,10 @@
                 </project-nav>
             </v-col>
             <v-col cols="10">
+                <project-tab
+                    :projectId="$route.params.projectId"
+                >
+                </project-tab>
                 <v-list>
                     <todo-list-item
                         v-for="todo,index in todos"
@@ -24,12 +28,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import ProjectNav from '../../components/ProjectNav.vue'
+import ProjectTab from '../../components/ProjectTab.vue'
 import TodoListItem from '../../components/TodoListItem.vue'
 
 export default Vue.extend({
     name: 'ProjectTasks',
     components: {
         ProjectNav,
+        ProjectTab,
         TodoListItem
     },
     data: function() {
@@ -73,6 +79,10 @@ export default Vue.extend({
     methods: {
         action: function(index:number) {
             this.todos[index].status = !this.todos[index].status
+        },
+        test: function() {
+            const token = this.$store.getters.jwtToken
+            console.log(token)
         }
     }
 })
