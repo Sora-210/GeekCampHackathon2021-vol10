@@ -18,18 +18,19 @@
       <v-btn
         elevation="3"
         outlined
-        @click="$router.push('/login')"
-        v-if="$store.getters.User !== null"
+        @click="logout"
+        v-if="$store.getters.loginState"
       >
-        <span class="mr-2">Login</span>
+        <span class="mr-2">Logout</span>
       </v-btn>
+      
       <v-btn
         elevation="3"
         outlined
-        @click="logout"
+        @click="$router.push('/login')"
         v-else
       >
-        <span class="mr-2">Logout</span>
+        <span class="mr-2">Login</span>
       </v-btn>
     </v-app-bar>
 
@@ -54,6 +55,7 @@ export default Vue.extend({
       const auth:Auth = getAuth()
       signOut(auth)
         .then(() => {
+          this.$store.commit('deleteUser')
           this.$router.push('/')
         })
     }
