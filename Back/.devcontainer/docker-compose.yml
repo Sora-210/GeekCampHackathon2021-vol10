@@ -1,0 +1,31 @@
+version: '3'
+services:
+  dev:
+    build: .
+    command: sleep infinity
+    working_dir: /work
+    volumes:
+      - ../:/work:cached
+      - ~/.ssh:/root/.ssh
+      - /work/node_modules
+    networks:
+      devNet:
+        ipv4_address: 172.0.1.2
+  db:
+    image: mysql:8.0.21
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: taskchecker
+      MYSQL_ROOT_Host: dev
+    volumes:
+      - ./Data/DB:/var/lib/mysql
+    networks:
+      devNet:
+          ipv4_address: 172.0.1.3
+networks:
+  devNet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.0.1.0/24
