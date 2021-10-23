@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize'
+import { allMigrationUp } from './migration/migrationAll'
 const dbInstance = new Sequelize({
     "username": "root",
     "password": "pass",
@@ -6,4 +7,8 @@ const dbInstance = new Sequelize({
     "host": "db",
     "dialect": "mysql"
 })
+
+//Migration
+allMigrationUp(dbInstance)
+
 export { dbInstance }
