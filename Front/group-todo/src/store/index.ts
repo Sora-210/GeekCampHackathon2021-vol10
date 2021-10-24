@@ -1,38 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { api } from '../axios'
+import { getAuth, Auth, onAuthStateChanged} from '@firebase/auth'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     User:null,
-    projectList: [
-      {
-        'name':'project 1',
-        'id':'1',
-        'icon':'mdi-earth'
-      },
-      {
-        'name':'project 2',
-        'id':'2',
-        'icon':'mdi-earth'
-      },
-      {
-        'name':'project 3',
-        'id':'3',
-        'icon':'mdi-earth'
-      },
-      {
-        'name':'project 4',
-        'id':'4',
-        'icon':'mdi-earth'
-      },
-      {
-        'name':'project 5',
-        'id':'5',
-        'icon':'mdi-earth'
-      },
-    ]
+    projectList: []
   },
   getters: {
     loginState: (state) => {
@@ -45,9 +21,36 @@ export default new Vuex.Store({
     },
     deleteUser(state) {
       state.User = null
+    },
+    setProject(state, list) {
+      state.projectList = list
     }
   },
   actions: {
+    projectGet: function(state) {
+      const auth: Auth = getAuth()
+      onAuthStateChanged(auth,async (user) => {
+          const header = {
+              'Content-Type': 'application/json',
+              'Authorization': ''
+          }
+
+          user!.getIdToken()
+          .then((token) => {
+              console.log(token)
+              header.Authorization = token
+              api.get('/projects', {headers: header})
+                  .then((res:any) => {
+                    console.log(res)
+                    state.commit('setProject', res.data)
+                  })
+                  .catch((e:any) => {
+                      console.log(e)
+                  })
+          })
+          
+      })
+    }
   },
   modules: {
   }

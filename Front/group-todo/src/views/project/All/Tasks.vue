@@ -1,17 +1,13 @@
 <template>
     <div class="all">
         <v-row class="all">
-            <v-col cols="2">
-                <project-nav
-                    @reloadTodo="getTodos"
-                >
+            <v-col cols="2" class="all">
+                <project-nav>
                 </project-nav>
             </v-col>
             <v-col cols="10">
-                <project-tab
-                    :projectId="$route.params.projectId"
-                >
-                </project-tab>
+                <project-tab-all>
+                </project-tab-all>
                 <v-list>
                     <todo-list-item
                         v-for="todo in todos"
@@ -22,43 +18,28 @@
                     >
                     </todo-list-item>
                 </v-list>
-                <v-btn
-                    @click="isTodoDialog = true"
-                >
-                    ToDoを追加する
-                </v-btn>
             </v-col>
         </v-row>
-        <todo-add-dialog
-            :projectId="$route.params.projectId"
-            :isDialog="isTodoDialog"
-            @close="DialogClose"
-        >
-        </todo-add-dialog>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import ProjectNav from '../../components/ProjectNav.vue'
-import ProjectTab from '../../components/ProjectTab.vue'
-import TodoListItem from '../../components/TodoListItem.vue'
-import TodoAddDialog from '../../components/TodoAddDialog.vue'
-
-import { api } from '../../axios'
+import ProjectNav from '../../../components/ProjectNav.vue'
+import ProjectTabAll from '../../../components/ProjectTabAll.vue'
+import TodoListItem from '../../../components/TodoListItem.vue'
+import { api } from '../../../axios'
 import { getAuth, Auth, onAuthStateChanged} from '@firebase/auth'
 
 export default Vue.extend({
-    name: 'ProjectTasks',
+    name: 'AllProjectTasks',
     components: {
         ProjectNav,
-        ProjectTab,
-        TodoListItem,
-        TodoAddDialog
+        ProjectTabAll,
+        TodoListItem
     },
     data: function() {
         return {
-            isTodoDialog: false,
             todos: []
         }
     },
@@ -96,7 +77,7 @@ export default Vue.extend({
                 user!.getIdToken()
                 .then((token) => {
                     header.Authorization = token
-                    api.get('/todos/project/'+this.$route.params.projectId, {headers: header})
+                    api.get('/todos' , {headers: header})
                         .then((res:any) => {
                             this.todos = res.data
                         })
@@ -106,10 +87,6 @@ export default Vue.extend({
                 })
                 
             })
-        },
-        DialogClose: function() {
-            this.getTodos()
-            this.isTodoDialog = false
         }
     },
     mounted: function() {

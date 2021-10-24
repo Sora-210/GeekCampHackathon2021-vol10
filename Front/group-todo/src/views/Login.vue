@@ -1,6 +1,6 @@
 <template>
   <v-row id="box">
-    <v-col cols="6" id="foam">
+    <v-col cols="12" md="6" id="foam">
       <div id="foamBlock">
         <h3>
           Login
@@ -14,7 +14,7 @@
         </v-btn>
       </div>
     </v-col>
-    <v-col cols="6">
+    <v-col cols="12" md="6">
     </v-col>
   </v-row>
 </template>
@@ -64,5 +64,13 @@ export default Vue.extend({
 }
 #foamBlock h3 {
   padding-bottom: 100px;
+}
+
+@media screen and (max-width: 500px) {
+  #foamBlock {
+    width: 70%;
+    margin: auto auto;
+    padding: 40px 0;
+  }
 }
 </style>
