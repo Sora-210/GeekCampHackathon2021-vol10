@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize'
 import { dbInstance } from '../instance'
+import { Affiliations } from './modelAffiliations'
 
 class Projects extends Model {
     public readonly id: number
