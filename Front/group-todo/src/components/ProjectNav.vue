@@ -22,6 +22,7 @@
                     v-for="project in $store.state.projectList"
                     :key="project.Project.id"
                     :to="path(project.Project.id)"
+                    @click="$emit('reloadTodo')"
                 >
                     <v-list-item-title>
                         {{ project.Project.name }}

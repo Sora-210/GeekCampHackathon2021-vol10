@@ -2,7 +2,9 @@
     <div class="all">
         <v-row class="all">
             <v-col cols="2">
-                <project-nav>
+                <project-nav
+                    @reloadTodo="getTodos"
+                >
                 </project-nav>
             </v-col>
             <v-col cols="10">
@@ -20,8 +22,19 @@
                     >
                     </todo-list-item>
                 </v-list>
+                <v-btn
+                    @click="isTodoDialog = true"
+                >
+                    ToDoを追加する
+                </v-btn>
             </v-col>
         </v-row>
+        <todo-add-dialog
+            :projectId="$route.params.projectId"
+            :isDialog="isTodoDialog"
+            @close="DialogClose"
+        >
+        </todo-add-dialog>
     </div>
 </template>
 
@@ -30,6 +43,8 @@ import Vue from 'vue'
 import ProjectNav from '../../components/ProjectNav.vue'
 import ProjectTab from '../../components/ProjectTab.vue'
 import TodoListItem from '../../components/TodoListItem.vue'
+import TodoAddDialog from '../../components/TodoAddDialog.vue'
+
 import { api } from '../../axios'
 import { getAuth, Auth, onAuthStateChanged} from '@firebase/auth'
 
@@ -38,10 +53,12 @@ export default Vue.extend({
     components: {
         ProjectNav,
         ProjectTab,
-        TodoListItem
+        TodoListItem,
+        TodoAddDialog
     },
     data: function() {
         return {
+            isTodoDialog: false,
             todos: []
         }
     },
@@ -89,6 +106,10 @@ export default Vue.extend({
                 })
                 
             })
+        },
+        DialogClose: function() {
+            this.getTodos()
+            this.isTodoDialog = false
         }
     },
     mounted: function() {
