@@ -9,8 +9,8 @@
         id="title_box"
       >
         <div id="title">
-          <h1>Group Task Checker</h1>
-          <p>グループプロジェクトのタスクを一括管理</p>
+          <h1>ProTasu (プロタス)</h1>
+          <p><span class="weight">プロ</span>ジェクトを<span class="weight">タス</span>ことでスムーズに</p>
         </div>
       </v-row>
     </v-parallax>
@@ -36,8 +36,11 @@
 #title {
   color: #2c2c2c;
   text-align: center;
-  padding: 30px 50px;
+  padding: 40px 70px;
   backdrop-filter: blur(4px);
   border-radius: 30px
+}
+.weight {
+  color: #009688
 }
 </style>

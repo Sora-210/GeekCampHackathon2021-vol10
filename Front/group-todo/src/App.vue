@@ -7,9 +7,10 @@
       >
         <div class="d-flex align-center">
           <h1
+            id="title"
             @click="home"
           >
-            Group Task Checker
+            ProTasu
           </h1>
         </div>
 
@@ -72,3 +73,11 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style scoped>
+@media screen and (max-width: 500px) {
+  #title {
+    font-size: 18px;
+  }
+}
+</style>
