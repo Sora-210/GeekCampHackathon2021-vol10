@@ -92,7 +92,7 @@ todosRouter.get('/project/:projectId', async(req, res) => {
             },
             transaction: T
         }
-        const response = await DB.Todos.findOne(options)
+        const response = await DB.Todos.findAll(options)
         await T.commit()
         res.status(201).json(response)
     } catch(e) {

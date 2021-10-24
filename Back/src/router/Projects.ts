@@ -16,8 +16,13 @@ projectsRouter.get('/', async(req, res) => {
     try {
         const options = {
             where: {
-                uid: req.uid
+                uid: req.uid,
+                
             },
+            include: [{
+                model: DB.Projects,
+                required: false
+            }],
             transaction: T
         }
         const ProjectList = await DB.Affiliations.findAll(options)

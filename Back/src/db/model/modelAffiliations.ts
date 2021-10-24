@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize'
 import { dbInstance } from '../instance'
+import { Projects } from './modelProjects'
 
 class Affiliations extends Model {
     public id: number
@@ -35,6 +36,10 @@ Affiliations.init({
 },{
     sequelize: dbInstance,
     timestamps: true
+})
+Affiliations.belongsTo(Projects, {
+    foreignKey: 'project_id',
+    targetKey: 'id'
 })
 
 export { Affiliations }

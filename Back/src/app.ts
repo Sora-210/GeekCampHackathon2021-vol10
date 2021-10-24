@@ -33,6 +33,7 @@ const auth:Auth = getAuth()
 //jwtCheck
 app.all('*', (req, res, next) => {
     const token:string = req.header('Authorization')!
+    console.log(token)
     auth.verifyIdToken(token)
     .then((result) => {
         req.uid = result.uid
@@ -47,7 +48,6 @@ app.all('*', (req, res, next) => {
 import { projectsRouter } from './router/Projects'
 app.use('/projects', projectsRouter)
 import { todosRouter } from './router/Todos'
-import { all } from 'sequelize/types/lib/operators'
 app.use('/todos', todosRouter)
 //###################################################
 app.listen(PORT, () => {
