@@ -43,4 +43,10 @@
 .weight {
   color: #009688
 }
+
+@media screen and (max-width: 500px) {
+  #title {
+    padding: 40px 10px;
+}
+}
 </style>
