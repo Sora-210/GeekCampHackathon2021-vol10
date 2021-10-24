@@ -15,7 +15,6 @@ dbInstance.authenticate()
         console.log("DB error")
         console.log(e)
     })
-
 //###################################################
 //MagicNumber
 const PORT:Number = 8000
@@ -47,6 +46,9 @@ app.all('*', (req, res, next) => {
 //Routing
 import { projectsRouter } from './router/Projects'
 app.use('/projects', projectsRouter)
+import { todosRouter } from './router/Todos'
+import { all } from 'sequelize/types/lib/operators'
+app.use('/todos', todosRouter)
 //###################################################
 app.listen(PORT, () => {
     console.log("API Server Started.")
