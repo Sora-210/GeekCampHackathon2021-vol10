@@ -39,12 +39,6 @@ export default Vue.extend({
             type: Number,
             required: true
         }
-    },
-    methods: {
-        detail: function() {
-            //ダイアログを開く
-            console.log("detail")
-        }
     }
 })
 </script>

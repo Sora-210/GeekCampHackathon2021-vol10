@@ -22,8 +22,8 @@ const routes: Array<RouteConfig> = [
   //Project Pages
   {
     path: '/project/all/tasks',
-    name: 'ProjectTasks',
-    component: () => import('../views/project/Tasks.vue'),
+    name: 'AllProjectTasks',
+    component: () => import('../views/project/All/Tasks.vue'),
     meta: {
       requireAuth: true
     }
