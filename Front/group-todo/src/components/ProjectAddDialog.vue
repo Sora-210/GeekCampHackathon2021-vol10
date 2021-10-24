@@ -9,26 +9,27 @@
             <v-stepper-header v-model="stepperPage">
                 <v-stepper-step step="1" :complete="stepperPage >= 2" complete-icon="mdi-check-circle-outline">入力</v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step step="2" :complete="stepperPage >= 2" complete-icon="mdi-check-circle-outline">完了</v-stepper-step>
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
-                    <v-form ref="form" v-model="isValid" class="pt-2 mb-4">
-                        <v-text-field
-                            label="プロジェクト名"
-                            v-model="formData"
-                            :rules="[ v => !!v || 'プロジェクト名を入力してください']"
-                            outlined>
-                        </v-text-field>
-                    </v-form>
-                    <v-btn color="success" @click="createProject">
-                        作成
-                    </v-btn>
-                </v-stepper-content>
-                <v-stepper-content step="2">
-                    <v-btn color="success" @click="createProject">
-                        作成
-                    </v-btn>
+                    <div v-if="status">
+                        <v-form ref="form" v-model="isValid" class="pt-2 mb-4">
+                            <v-text-field
+                                label="プロジェクト名"
+                                v-model="formData"
+                                :rules="[ v => !!v || 'プロジェクト名を入力してください']"
+                                outlined>
+                            </v-text-field>
+                        </v-form>
+                        <v-btn color="success" @click="createProject">
+                            作成
+                        </v-btn>
+                    </div>
+                    <div class="mb-12" height="200px" v-else>
+                        <v-alert>
+                            {{ alert }}
+                        </v-alert>
+                    </div>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
@@ -50,7 +51,8 @@ export default Vue.extend({
             stepperPage:1,
             isValid: false,
             formData: "",
-            alert: ""
+            alert: "",
+            status: true
         }
     },
     methods: {
@@ -71,12 +73,13 @@ export default Vue.extend({
                         header.Authorization = token
                         api.post('/projects', sendData, {headers: header})
                             .then((res:any) => {
-                                console.log(res)
-                                this.alert = "プロジェクトの作成に成功しました"
+                                this.$store.dispatch('projectGet')
+                                this.status = false
+                                this.alert = "プロジェクトを作成しました"
                                 this.stepperPage = 2 
                             })
                             .catch((e:any) => {
-                                console.log(e)
+                                this.status = false
                                 this.alert = "プロジェクトの作成に失敗しました"
                                 this.stepperPage = 2
                             })
@@ -86,6 +89,7 @@ export default Vue.extend({
             }
         },
         init: function() {
+            this.status = true
             this.alert = ""
             this.stepperPage = 1
             this.formData = ""

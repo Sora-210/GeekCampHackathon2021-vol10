@@ -37,6 +37,7 @@ export default new Vuex.Store({
 
           user!.getIdToken()
           .then((token) => {
+              console.log(token)
               header.Authorization = token
               api.get('/projects', {headers: header})
                   .then((res:any) => {
