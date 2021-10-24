@@ -1,0 +1,35 @@
+version: '2.2'
+services:
+    db:
+        image: mysql:8.0.21
+        environment:
+            MYSQL_ROOT_PASSWORD: pass
+            MYSQL_DATABASE: taskchecker
+            MYSQL_ROOT_Host: api
+        volumes:
+            - ./Data/DB:/var/lib/mysql
+        networks:
+            todoCheckerNetWork:
+                ipv4_address: 172.0.2.3
+    frontend:
+        build: ./Front/.
+        ports:
+            - 80:80
+        networks:
+            todoCheckerNetWork:
+                ipv4_address: 172.0.2.4
+    api:
+        build: ./Back/.
+        ports:
+            - 8000:8000
+        networks:
+            todoCheckerNetWork:
+                ipv4_address: 172.0.2.5
+
+networks:
+    todoCheckerNetWork:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.0.2.0/24
